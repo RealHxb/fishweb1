@@ -1,0 +1,406 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.elangzhi.fish.dao.GradeMapper" >
+  <resultMap id="BaseResultMap" type="com.elangzhi.fish.model.Grade" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="person_id" property="personId" jdbcType="BIGINT" />
+    <result column="game_id" property="gameId" jdbcType="BIGINT" />
+    <result column="time" property="time" jdbcType="TIMESTAMP" />
+    <result column="chang" property="chang" jdbcType="INTEGER" />
+    <result column="qu" property="qu" jdbcType="INTEGER" />
+    <result column="room" property="room" jdbcType="INTEGER" />
+    <result column="number" property="number" jdbcType="INTEGER" />
+    <result column="weight" property="weight" jdbcType="DOUBLE" />
+    <result column="grade" property="grade" jdbcType="DOUBLE" />
+    <result column="ranking" property="ranking" jdbcType="DOUBLE" />
+    <result column="sorts" property="sorts" jdbcType="DOUBLE" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, person_id, game_id, `time`, chang, qu,room, `number`, weight, grade, ranking
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from grade
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from grade
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.elangzhi.fish.model.Grade" >
+    insert into grade (id, person_id, game_id, 
+      `time`, chang, qu, room,
+      `number`, weight, grade, ranking,sorts)
+    values (#{id,jdbcType=BIGINT}, #{personId,jdbcType=BIGINT}, #{gameId,jdbcType=BIGINT}, 
+      #{time,jdbcType=TIMESTAMP}, #{chang,jdbcType=INTEGER}, #{qu,jdbcType=INTEGER}, #{room,jdbcType=INTEGER},
+      #{number,jdbcType=INTEGER}, #{weight,jdbcType=DOUBLE}, #{grade,jdbcType=DOUBLE},
+      #{ranking,jdbcType=DOUBLE}, #{sorts,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.elangzhi.fish.model.Grade" >
+    insert into grade
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="personId != null" >
+        person_id,
+      </if>
+      <if test="gameId != null" >
+        game_id,
+      </if>
+      <if test="time != null" >
+        `time`,
+      </if>
+      <if test="chang != null" >
+        chang,
+      </if>
+      <if test="qu != null" >
+        qu,
+      </if>
+      <if test="room != null" >
+        room,
+      </if>
+      <if test="number != null" >
+        `number`,
+      </if>
+      <if test="weight != null" >
+        weight,
+      </if>
+      <if test="grade != null" >
+        grade,
+      </if>
+      <if test="ranking != null" >
+        ranking,
+      </if>
+        <if test="sorts != null" >
+        sorts,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="personId != null" >
+        #{personId,jdbcType=BIGINT},
+      </if>
+      <if test="gameId != null" >
+        #{gameId,jdbcType=BIGINT},
+      </if>
+      <if test="time != null" >
+        #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="chang != null" >
+        #{chang,jdbcType=INTEGER},
+      </if>
+      <if test="qu != null" >
+        #{qu,jdbcType=INTEGER},
+      </if>
+      <if test="room != null" >
+        #{room,jdbcType=INTEGER},
+      </if>
+      <if test="number != null" >
+        #{number,jdbcType=INTEGER},
+      </if>
+      <if test="weight != null" >
+        #{weight,jdbcType=DOUBLE},
+      </if>
+      <if test="grade != null" >
+        #{grade,jdbcType=DOUBLE},
+      </if>
+      <if test="ranking != null" >
+        #{ranking,jdbcType=DOUBLE},
+      </if>
+         <if test="sorts != null" >
+        #{sorts,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.elangzhi.fish.model.Grade" >
+    update grade
+    <set >
+      <if test="personId != null" >
+        person_id = #{personId,jdbcType=BIGINT},
+      </if>
+      <if test="gameId != null" >
+        game_id = #{gameId,jdbcType=BIGINT},
+      </if>
+      <if test="time != null" >
+        `time` = #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="chang != null" >
+        chang = #{chang,jdbcType=INTEGER},
+      </if>
+      <if test="qu != null" >
+        qu = #{qu,jdbcType=INTEGER},
+      </if>
+      <if test="room != null" >
+        room = #{room,jdbcType=INTEGER},
+      </if>
+
+        number = #{number,jdbcType=INTEGER},
+        weight = #{weight,jdbcType=DOUBLE},
+      <if test="grade != null" >
+        grade = #{grade,jdbcType=DOUBLE},
+      </if>
+      <if test="ranking != null" >
+        ranking = #{ranking,jdbcType=DOUBLE},
+      </if>
+       <if test="sorts != null" >
+        sorts = #{sorts,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.elangzhi.fish.model.Grade" >
+    update grade
+    set person_id = #{personId,jdbcType=BIGINT},
+      game_id = #{gameId,jdbcType=BIGINT},
+      `time` = #{time,jdbcType=TIMESTAMP},
+      chang = #{chang,jdbcType=INTEGER},
+      qu = #{qu,jdbcType=INTEGER},
+      room = #{room,jdbcType=INTEGER},
+      `number` = #{number,jdbcType=INTEGER},
+      weight = #{weight,jdbcType=DOUBLE},
+      grade = #{grade,jdbcType=DOUBLE},
+      ranking = #{ranking,jdbcType=DOUBLE}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+
+  <select id="findInfo1" resultMap="BaseResultMap">
+    select a.*,b.`name` personName,b.number personNumber
+    from grade a
+    left join person b on a.person_id = b.id
+    where 1=1
+    and a.game_id = #{gameId,jdbcType=BIGINT}
+    and a.chang = #{chang,jdbcType=INTEGER}
+    <if test="qu != null" >
+        and a.`qu` = #{qu,jdbcType=INTEGER}
+    </if>
+    order by a.`qu` asc ,a.room asc,a.number desc,a.weight desc
+  </select>
+
+  
+    <select id="findInfo2" resultMap="BaseResultMap">
+    select a.*,b.`name` personName,b.number personNumber
+    from grade a
+    left join person b on a.person_id = b.id
+    where 1=1
+    and a.game_id = #{gameId,jdbcType=BIGINT}
+    and b.number = #{number,jdbcType=INTEGER}
+    order by a.`qu` asc ,a.room asc,a.number desc,a.weight desc
+  </select>
+  
+    
+  <select id="CheckInfo" resultType="com.elangzhi.fish.model.Grade">
+                
+
+	select a.*,b.`name` personName,b.number personNumber
+    from grade a
+    left join person b on a.person_id = b.id
+    where 1=1
+    and a.game_id = #{gameId,jdbcType=BIGINT}
+    and a.chang = #{chang,jdbcType=INTEGER}
+    <if test="qu != null" >
+        and a.`qu` = #{qu,jdbcType=INTEGER}
+    </if>
+    order by a.`qu` asc ,a.room asc,a.number desc,a.weight desc
+  </select>
+    
+    
+  <select id="listByGame" resultMap="BaseResultMap">
+    select a.*,b.`name` personName,b.number personNumber
+    from grade a
+    left join person b on a.person_id = b.id
+    where a.game_id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="countQu" resultMap="BaseResultMap">
+    select qu,count(id) quCount
+    from grade
+    where 1=1 and game_id = #{id,jdbcType=BIGINT} and chang=1
+    group by qu
+    order by quCount
+  </select>
+  <select id="findByGameChangPerson" resultMap="BaseResultMap">
+    select *
+    from grade
+    where 1=1
+    and game_id = #{gameId,jdbcType=BIGINT}
+    and chang = #{chang,jdbcType=INTEGER}
+    and person_id = #{personId,jdbcType=BIGINT}
+        
+  </select>
+  
+    <select id="findByGradeId" resultMap="BaseResultMap">
+    select *
+    from grade
+    where 1=1
+    and id = #{id,jdbcType=BIGINT}
+  </select>
+  
+  <select id="gradeShow" resultType="com.elangzhi.fish.model.Grade">
+    select a.*,b.`name` personName,b.number personNumber,(a.grade+a.ranking) defen
+    from grade a
+    left join person b on a.person_id = b.id
+    where 1=1
+    and a.game_id = #{gameId,jdbcType=BIGINT}
+    <if test="chang != null" >
+        and a.chang = #{chang,jdbcType=INTEGER}
+        <if test="qu != null" >
+            and a.`qu` = #{qu,jdbcType=INTEGER}
+        </if>
+    </if>
+    <if test="chang == null" >
+
+    </if>
+
+    order by defen asc ,a.number desc,a.weight desc 
+  </select>
+
+  <select id="groupShow" resultType="com.elangzhi.fish.model.Grade">
+        select b.`group` personName,sum(a.number) number,sum(a.weight) weight,sum(a.grade) grade,
+        sum(a.ranking) ranking,sum(a.grade)+sum(a.ranking) defen
+        from grade a
+        left join person b on a.person_id = b.id
+        where 1=1
+        and a.game_id = #{gameId,jdbcType=BIGINT}
+        <if test="chang != null" >
+            and a.chang = #{chang,jdbcType=INTEGER}
+            <if test="qu != null" >
+                and a.`qu` = #{qu,jdbcType=INTEGER}
+            </if>
+        </if>
+        and b.`group` != ''
+        group by b.`group`
+        order by defen asc,number desc, weight desc
+    </select>
+
+    <select id="zongfenShow" resultType="com.elangzhi.fish.model.Grade">
+		select a.game_id gameId,a.person_id personId,b.number personNumber,b.`name` personName,sum(a.ranking) as ranking,
+		sum(a.number) as number ,sum(a.weight) as weight ,sum(a.grade)+sum(a.ranking) defen,sum(sorts) as sorts
+		from grade a 
+		left join person b on a.person_id = b.id
+		where a.game_id =  #{gameId,jdbcType=BIGINT}
+		group by a.person_id,b.number,b.`name`
+		order by defen asc ,number DESC,weight DESC
+	</select>
+	
+
+    <select id="jifen" resultType="com.elangzhi.fish.model.Grade">
+        select a.*,b.`name` personName,b.number personNumber
+        from grade a
+        left join person b on a.person_id = b.id
+        where 1=1
+        and a.game_id = #{gameId,jdbcType=BIGINT}
+        <if test="chang != null" >
+            and a.chang = #{chang,jdbcType=INTEGER}
+            <if test="qu != null" >
+              and a.`qu` = #{qu,jdbcType=INTEGER}
+            </if>
+        </if>
+        order by a.number desc,a.weight desc,a.room
+    </select>
+
+    <select id="findByChangNumber" resultType="com.elangzhi.fish.model.Grade">
+        select a.*
+        from grade a
+        left join person b on a.person_id = b.id
+        where 1=1
+        and a.game_id = #{gameId,jdbcType=BIGINT}
+        and a.chang = #{chang,jdbcType=INTEGER}
+        and b.number = #{personId,jdbcType=INTEGER}
+    </select>
+    
+    <select id="findDabianGrade" resultMap="BaseResultMap">
+	    select *
+	    from grade
+	    where game_id = #{gameId,jdbcType=BIGINT}
+	    and chang = #{chang,jdbcType=INTEGER}
+	    and person_id = #{personId,jdbcType=BIGINT}
+	    and room = #{room,jdbcType=INTEGER}
+  	</select>
+  	
+    <select id="findPersonAllNumberGrade" resultMap="BaseResultMap" parameterType="com.elangzhi.fish.model.Grade">
+	    select *
+	    from grade
+	    where game_id = #{gameId,jdbcType=BIGINT}
+	    and person_id = #{personId,jdbcType=BIGINT}
+	    and number > 0
+	    order by number desc
+  	</select>
+  	<select id="findPersonAllGrade" resultMap="BaseResultMap" parameterType="com.elangzhi.fish.model.Grade">
+	    select *
+	    from grade
+	    where game_id = #{gameId,jdbcType=BIGINT}
+	    and person_id = #{personId,jdbcType=BIGINT}
+	    order by grade asc
+  	</select>
+  	
+  	 <select id="findPersonAllWeightGrade" resultMap="BaseResultMap" parameterType="com.elangzhi.fish.model.Grade">
+	    select *
+	    from grade
+	    where game_id = #{gameId,jdbcType=BIGINT}
+	    and person_id = #{personId,jdbcType=BIGINT}
+	    and weight > 0
+	    order by weight desc
+  	</select>
+  	
+  	  <select id="findGroupAllNumberGrade" resultMap="BaseResultMap">
+	   	select a.*
+        from grade a
+        join person b on a.person_id = b.id
+        where 
+			b.group	=  #{personName}
+        and a.game_id = #{gameId,jdbcType=BIGINT}
+        <if test="chang != null" >
+            and a.chang = #{chang,jdbcType=INTEGER}
+            <if test="qu != null" >
+                and a.qu = #{qu,jdbcType=INTEGER}
+            </if>
+        </if>
+         and a.number > 0
+	    order by a.number asc
+  	</select>
+  	<select id="findGroupAllGrade" resultMap="BaseResultMap">
+	   select a.*
+        from grade a
+        join person b on a.person_id = b.id
+        where 
+			b.group	=  #{personName}
+        and a.game_id = #{gameId,jdbcType=BIGINT}
+        <if test="chang != null" >
+            and a.chang = #{chang,jdbcType=INTEGER}
+            <if test="qu != null" >
+                and a.qu = #{qu,jdbcType=INTEGER}
+            </if>
+        </if>
+         order by a.grade asc
+  	</select>
+  	
+  	 <select id="findGroupAllWeightGrade" resultMap="BaseResultMap">
+	    select a.*
+        from grade a
+        join person b on a.person_id = b.id
+        where 
+			b.group	=  #{personName}
+        and a.game_id = #{gameId,jdbcType=BIGINT}
+        <if test="chang != null" >
+            and a.chang = #{chang,jdbcType=INTEGER}
+            <if test="qu != null" >
+                and a.qu = #{qu,jdbcType=INTEGER}
+            </if>
+        </if>
+        and a.weight > 0
+	    order by a.weight asc
+  	</select>
+  	
+  	<select id="getMaxGradeByGame" resultType="java.lang.Integer">
+		select max(room) from grade where
+		1=1 
+		<if test="gameId != null" >
+            and game_id = #{gameId,jdbcType=BIGINT}
+        </if>
+  	</select>
+
+</mapper>

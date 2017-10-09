@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.elangzhi.fish.dao.PersonMapper" >
+  <resultMap id="BaseResultMap" type="com.elangzhi.fish.model.Person" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="number" property="number" jdbcType="INTEGER" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="price" property="price" jdbcType="DOUBLE" />
+    <result column="intro" property="intro" jdbcType="VARCHAR" />
+    <result column="group" property="group" jdbcType="VARCHAR" />
+    <result column="game_id" property="gameId" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, `name`, `type`,number, phone, address, price, intro,`group`, game_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from person
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from person
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.elangzhi.fish.model.Person" >
+    insert into person (id, `name`, `type`, number,
+      phone, address, price, 
+      intro, game_id,`group`)
+    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER},  #{number,jdbcType=INTEGER},
+      #{phone,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{price,jdbcType=DOUBLE}, 
+      #{intro,jdbcType=VARCHAR}, #{gameId,jdbcType=BIGINT},#{group,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.elangzhi.fish.model.Person" >
+    insert into person
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        `name`,
+      </if>
+      <if test="type != null" >
+        `type`,
+      </if>
+      <if test="number != null" >
+        `number`,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="intro != null" >
+        intro,
+      </if>
+      <if test="group != null" >
+        `group`,
+      </if>
+      <if test="gameId != null" >
+        game_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="number != null" >
+        #{number,jdbcType=INTEGER},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="intro != null" >
+        #{intro,jdbcType=VARCHAR},
+      </if>
+      <if test="group != null" >
+        #{group,jdbcType=VARCHAR},
+      </if>
+      <if test="gameId != null" >
+        #{gameId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.elangzhi.fish.model.Person" >
+    update person
+    <set >
+      <if test="name != null" >
+        `name` = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        `type` = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="number != null" >
+        `number` = #{number,jdbcType=INTEGER},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="intro != null" >
+        intro = #{intro,jdbcType=VARCHAR},
+      </if>
+      <if test="group != null" >
+        `group` = #{group,jdbcType=VARCHAR},
+      </if>
+      <if test="gameId != null" >
+        game_id = #{gameId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.elangzhi.fish.model.Person" >
+    update person
+    set `name` = #{name,jdbcType=VARCHAR},
+      `type` = #{type,jdbcType=INTEGER},
+      `number` = #{number,jdbcType=INTEGER},
+      phone = #{phone,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      price = #{price,jdbcType=DOUBLE},
+      intro = #{intro,jdbcType=VARCHAR},
+      `group` = #{group,jdbcType=VARCHAR},
+      game_id = #{gameId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="listByGame" resultMap="BaseResultMap">
+    select a.*
+    from person a
+    where 1=1 and type='20'
+    <if test="gameId != null" >
+      and a.`game_id` = #{gameId,jdbcType=BIGINT}
+    </if>
+    order by a.number
+  </select>
+
+  <select id="listExcludePersonTypeByGame" resultMap="BaseResultMap">
+    select a.*
+    from person a
+    where 1=1
+    <if test="gameId != null" >
+      and a.`game_id` = #{gameId,jdbcType=BIGINT}
+    </if>
+    <if test="type != null" >
+      and a.`type` != #{type,jdbcType=INTEGER}
+    </if>
+    order by a.type asc,number desc
+  </select>
+
+  <select id="listByGameType" resultMap="BaseResultMap">
+    select a.*
+    from person a
+    where 1=1
+    <if test="gameId != null" >
+      and a.`game_id` = #{gameId,jdbcType=BIGINT}
+    </if>
+    <if test="type != null" >
+      and a.`type` = #{type,jdbcType=INTEGER}
+    </if>
+
+    order by number desc
+  </select>
+
+  <select id="findNewNumber" resultMap="BaseResultMap">
+    select a.*
+    from person a
+    where 1=1
+    and a. `game_id` = #{gameId,jdbcType=BIGINT}
+    order by number desc
+    limit 0,1
+  </select>
+
+
+</mapper>
