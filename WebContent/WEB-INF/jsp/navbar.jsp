@@ -22,6 +22,7 @@
                <li class="active"><a href="/game">主页 <span class="sr-only">(current)</span></a></li>
                <!-- <li class="active"><a href="javascript:window.print()">打印 </a></li> -->
                <li class="active"><a href="javascript:PrintTable()">打印 </a></li>
+               <li class="active"><a href="/grade/finalEdit">总成绩修改 </a></li>
             </ul>
 
             <ul class="nav navbar-nav navbar-right">

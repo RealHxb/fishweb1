@@ -1,4 +1,7 @@
 /*     */ package com.elangzhi.fish.controller.game;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 /*     */ 
 /*     */ import com.elangzhi.fish.controller.json.Tip;
 /*     */ import com.elangzhi.fish.model.Game;
@@ -6,8 +9,13 @@
 /*     */ import com.elangzhi.fish.services.GameService;
 /*     */ import com.elangzhi.fish.services.GradeService;
 /*     */ import com.elangzhi.fish.services.PersonService;
+
+import java.io.UnsupportedEncodingException;
 /*     */ import java.math.BigDecimal;
+import java.net.URLDecoder;
 /*     */ import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 /*     */ import java.util.List;
 /*     */ import javax.annotation.Resource;
 /*     */ import javax.servlet.http.HttpServletRequest;
@@ -15,7 +23,9 @@
 /*     */ import org.springframework.stereotype.Controller;
 /*     */ import org.springframework.ui.ModelMap;
 /*     */ import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 /*     */ import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 /*     */ import org.springframework.web.bind.annotation.RequestParam;
 /*     */ import org.springframework.web.bind.annotation.ResponseBody;
 /*     */ import org.springframework.web.servlet.ModelAndView;
@@ -28,6 +38,7 @@
 /*     */   @RequestMapping({"/jifen/{gameId}"})
 /*     */   @ResponseBody
 /*     */   public Tip jifen(@PathVariable Long gameId, ModelMap model) {
+			  finalScores = new ArrayList<Grade>();
 /*  40 */     Game game = (Game)this.gameService.findById(gameId);
 /*  41 */     int maxGrade = this.gradeService.getMaxGradeByGame(gameId);
 /*     */     try {
@@ -111,6 +122,7 @@
 /*     */   @ResponseBody
 /*     */   public Tip fafen(Grade grade) {
 /*     */     try {
+				finalScores = new ArrayList<Grade>();
 /* 123 */       Grade grade1 = this.gradeService.findByChangNumber(grade.getGameId(), grade.getChang(), grade.getPersonId());
 /* 124 */       grade1.setRanking(grade.getRanking());
 /* 125 */       this.gradeService.updateById(grade1);
@@ -167,16 +179,104 @@
 /* 176 */     model.put("grades", grades);
 /* 177 */     return new ModelAndView("grade/show", model);
 /*     */   }
+
+			static List<Grade> finalScores = new ArrayList<Grade>();
+			static Game thisGame = new Game();
 /*     */   
 /*     */   @RequestMapping({"/show/{gameId}"})
 /*     */   public ModelAndView show3(@PathVariable Long gameId, ModelMap model) {
 /* 182 */     Game game = (Game)this.gameService.findById(gameId);
+			  thisGame = game;
 /* 183 */     model.put("game", game);
-/* 184 */     List<Grade> grades = this.gradeService.zongfenShow(gameId);
-/*     */     
-/* 186 */     model.put("grades", grades);
+			  if(finalScores.size()== 0) {
+				  List<Grade> grades = this.gradeService.zongfenShow(gameId);
+				  finalScores = grades;
+			  }
+/* 186 */     model.put("grades", finalScores);
 /* 187 */     return new ModelAndView("grade/show-all", model);
 /*     */   }
+
+/*     */   @RequestMapping({"/finalEdit"})
+   			public ModelAndView finalEdit(ModelMap model) {
+     			model.put("game", thisGame);
+     			model.put("grades", finalScores);
+     			return new ModelAndView("grade/finalEdit", model);
+/*     */   }
+/*     */   @RequestMapping(value="/finalSave", method=RequestMethod.POST ,produces="application/json")
+			@ResponseBody
+			public Tip finalSave( HttpServletRequest request, @RequestBody String b) {
+				try {
+					b = URLDecoder.decode(b, "UTF-8").replace('=',' ');
+					System.out.println("b:"+b);
+					List<Grade> list =  JSON.parseArray(b, Grade.class); 
+					for(Grade g:list) {
+						List<Grade> gs = new ArrayList<Grade>();
+						Grade g1 = new Grade();
+						if(g.getG1() != null && g.getG1()>=0) {
+							g1.setGrade(g.getG1());
+							gs.add(g1);
+						}
+						Grade g2 = new Grade();
+						if(g.getG2() != null && g.getG2()>=0) {
+							g2.setGrade(g.getG2());
+							gs.add(g2);
+						}
+						Grade g3 = new Grade();
+						if(g.getG3() != null && g.getG3()>=0) {
+							g3.setGrade(g.getG3());
+							gs.add(g3);
+						}
+						Grade g4 = new Grade();
+						if(g.getG4() != null && g.getG4()>=0) {
+							g4.setGrade(g.getG4());
+							gs.add(g4);
+						}
+						Grade g5 = new Grade();
+						if(g.getG5() != null && g.getG5()>=0) {
+							g5.setGrade(g.getG5());
+							gs.add(g5);
+						}
+						Grade g6 = new Grade();
+						if(g.getG6() != null && g.getG6()>=0) {
+							g6.setGrade(g.getG6());
+							gs.add(g6);
+						}
+						Grade g7 = new Grade();
+						if(g.getG7() != null && g.getG7()>=0) {
+							g7.setGrade(g.getG7());
+							gs.add(g7);
+						}
+						Grade g8 = new Grade();
+						if(g.getG8() != null && g.getG8()>=0) {
+							g8.setGrade(g.getG8());
+							gs.add(g8);
+						}
+						g.setChild(gs);
+					}
+					MyComparator mc = new MyComparator();  
+			        Collections.sort(list,mc); 
+					finalScores =list;
+					return new Tip();
+				} catch (Exception e) {
+					e.printStackTrace(); 
+				}
+				return new Tip(Integer.valueOf(1));
+	 		
+/*     */   }
+		public class MyComparator implements Comparator {  
+			   
+		    //接口，必须实现的方法  
+		    public int compare(Object o1, Object o2) {  
+		    	Grade p1 = (Grade) o1;  
+		    	Grade p2 = (Grade) o2;  
+		        if (p1.getDefen() < p2.getDefen())  
+		            return -1;  
+		        else if (p1.getDefen() > p2.getDefen())  
+		            return 1;  
+		        else  
+		            return 0;  
+		    }  
+		}   
 /*     */   
 /*     */   @RequestMapping({"/group/{gameId}/{chang}/{qu}"})
 /*     */   public ModelAndView groupShow1(@PathVariable Long gameId, @PathVariable Integer chang, @PathVariable Integer qu, ModelMap model)

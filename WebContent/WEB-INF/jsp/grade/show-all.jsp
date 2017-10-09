@@ -57,6 +57,6 @@
 </div>
 </body>
 </html>
-<script>
+<script type="text/javascript">
 
 </script>

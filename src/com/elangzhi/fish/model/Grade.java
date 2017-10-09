@@ -27,6 +27,14 @@
 /*  27 */   private Double ranking = Double.valueOf(0.0D);
 /*     */   
 /*     */   private Double defen;
+			private Double g1;
+			private Double g2;
+			private Double g3;
+			private Double g4;
+			private Double g5;
+			private Double g7;
+			private Double g6;
+			private Double g8;
 /*     */   
 /*     */   private Double sorts;
 /*     */   
@@ -172,7 +180,55 @@
 /*     */   public void setSorts(Double sorts) {
 /* 173 */     this.sorts = sorts;
 /*     */   }
-/*     */ }
+/*     */
+public Double getG1() {
+	return g1;
+}
+public void setG1(Double g1) {
+	this.g1 = g1;
+}
+public Double getG2() {
+	return g2;
+}
+public void setG2(Double g2) {
+	this.g2 = g2;
+}
+public Double getG3() {
+	return g3;
+}
+public void setG3(Double g3) {
+	this.g3 = g3;
+}
+public Double getG4() {
+	return g4;
+}
+public void setG4(Double g4) {
+	this.g4 = g4;
+}
+public Double getG5() {
+	return g5;
+}
+public void setG5(Double g5) {
+	this.g5 = g5;
+}
+public Double getG7() {
+	return g7;
+}
+public void setG7(Double g7) {
+	this.g7 = g7;
+}
+public Double getG6() {
+	return g6;
+}
+public void setG6(Double g6) {
+	this.g6 = g6;
+}
+public Double getG8() {
+	return g8;
+}
+public void setG8(Double g8) {
+	this.g8 = g8;
+} }
 
 
 /* Location:              E:\1 CoddingProject\webapps\fishweb.war!\WEB-INF\classes\com\elangzhi\fish\model\Grade.class
