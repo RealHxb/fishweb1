@@ -55,7 +55,14 @@ input{
 	                </td>
 	                <c:forEach var="item2" items="${item.child}" varStatus="status2">
 	                    <td style="width:80px" >
-	                    	<input type="text" class="fenshu" name="g${status2.count}" value="${item2.grade==0 ? '':item2.grade}" />
+		                    <c:choose>
+		                		<c:when test="${item2.grade==0}">
+		                			<input type="text" class="fenshu" style="background-color: red;"name="g${status2.count}" value="" />
+		                		</c:when>
+		                		<c:otherwise>
+		                			<input type="text" class="fenshu" name="g${status2.count}" value="${item2.grade}" />
+		                		</c:otherwise>
+	                		</c:choose>
 	                    </td>
 	                </c:forEach>
 	                <td style="width:60px">

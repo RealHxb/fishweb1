@@ -45,7 +45,14 @@
                 <td style="width:60px" >${item.personNumber}</td>
                 <td style="width:100px" >${item.personName}</td>
                 <c:forEach var="item2" items="${item.child}" varStatus="status2">
-                    <td style="width:80px" >${item2.grade==0?"":item2.grade}</td>
+                	<c:choose>
+                		<c:when test="${item2.grade==0}">
+                			<td style="width:80px;background-color: red;" ></td>
+                		</c:when>
+                		<c:otherwise>
+                			<td style="width:80px" >${item2.grade}</td>
+                		</c:otherwise>
+                	</c:choose>
                 </c:forEach>
                 <td style="width:60px" >${item.ranking==0?"":item.ranking}</td>
                 <td style="width:60px" >${item.defen==0?"":item.defen}</td>
