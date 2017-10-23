@@ -354,40 +354,23 @@
 /*     */   public ModelAndView printall(HttpServletRequest request, ModelMap model) {
 /* 354 */     Game game = this.gameService.findNew();
 /* 355 */     model.put("game", game);
-/* 356 */     if (game != null) {
-/* 357 */       List<Person> persons = this.personService.listByGameType(game.getId(), 20);
-/* 358 */       double middle = persons.size() / 3;
-/* 359 */       int mid = (int)Math.ceil(middle);
-				int j = persons.size() % 3;// 取余
-/* 360 */       List<Person> persons1 = new ArrayList<Person>();
-/* 361 */       List<Person> persons2 = new ArrayList<Person>();
-				List<Person> persons3 = new ArrayList<Person>();
-/* 362 */       for (int i = persons.size()-1; i >= 0; i--) {
-					if(j==0) {
-						if(i<mid) {
-							persons3.add((Person)persons.get(i));
-						}else if(i>=mid&& i<(mid*2)) {
-							persons2.add((Person)persons.get(i));
-						}else {
-							persons1.add((Person)persons.get(i));
-						}
-					}else {
-						if(i>=((mid+1)*2-(3-j))) {
-							persons3.add((Person)persons.get(i));
-						}else if(i>= mid && i<((mid+1)*2-(3-j))) {
-							persons2.add((Person)persons.get(i));
-						}else {
-							persons1.add((Person)persons.get(i));
-						}
-					}
-/*     */       }
-/* 368 */       model.put("persons", persons);
-/* 369 */       model.put("persons1", persons1);
-/* 370 */       model.put("persons2", persons2);
-				model.put("persons3", persons3);
-/*     */     }
 /* 372 */     return new ModelAndView("person/printAll", model);
 /*     */   }
+			@RequestMapping(value={"/ajaxPrint"}, method={org.springframework.web.bind.annotation.RequestMethod.POST})
+			@ResponseBody
+			public List<Person> printList(){
+				Game game = this.gameService.findNew();
+				List<Person> persons2 = new ArrayList<Person>();
+				if (game != null) {
+					List<Person> persons = this.personService.listByGameType(game.getId(), 20);
+					if(persons != null) {
+						for (int i = persons.size()-1; i >= 0; i--) {
+							persons2.add(persons.get(i));
+						}
+					}
+				}
+				return persons2;
+			}
 /*     */   
 /*     */   @RequestMapping(value={"/delete"}, method={org.springframework.web.bind.annotation.RequestMethod.POST})
 /*     */   @ResponseBody
