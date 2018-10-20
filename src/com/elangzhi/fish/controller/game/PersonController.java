@@ -100,7 +100,10 @@
 /*     */   {
 /* 101 */     String[] quArray = qus.split(";");
 /* 102 */     List<String> quList = new ArrayList<String>();
-/* 103 */     String[] arrayOfString1; int j = (arrayOfString1 = quArray).length; for (int i = 0; i < j; i++) { String q = arrayOfString1[i];
+/* 103 */     String[] arrayOfString1;
+				int j = (arrayOfString1 = quArray).length; 
+				for (int i = 0; i < j; i++) { 
+					String q = arrayOfString1[i];
 /* 104 */       if ((q != null) && (q.length() != 0)) {
 /* 105 */         quList.add(q);
 /*     */       }
@@ -140,8 +143,8 @@
 /* 140 */         grade.setPersonName("号码池已无数据！");
 /* 141 */         return grade;
 /*     */       }
-/* 143 */       List<Integer> theHaos = (List<Integer>)this.haoMap.get(chang + qu);
-/* 144 */       List<Integer> theMaxHaos = (List<Integer>)this.maxHaoMap.get(chang + qu);
+/* 143 */       List<Integer> theHaos = (List<Integer>)this.haoMap.get(chang +""+ qu);
+/* 144 */       List<Integer> theMaxHaos = (List<Integer>)this.maxHaoMap.get(chang +""+ qu);
 /* 145 */       int roomValue;
 				if (theHaos.size() > 0) {
 /* 146 */         roomValue = getRightNumber(theHaos, hadDabian);
@@ -168,11 +171,11 @@
 /*     */     
 /* 168 */     int random = getRandom(Integer.valueOf(qulist.size()));
 /* 169 */     int thequ = Integer.parseInt((String)qulist.get(random));
-/* 170 */     if (((List<?>)this.maxHaoMap.get(chang + thequ)).isEmpty()) {
+/* 170 */     if (((List<?>)this.maxHaoMap.get(chang +""+ thequ)).isEmpty()) {
 /* 171 */       qulist.remove(random);
 /* 172 */       for (int i = 0; i < qulist.size(); i++) {
 /* 173 */         String q = (String)qulist.get(i);
-/* 174 */         if (((List<?>)this.maxHaoMap.get(chang + q)).isEmpty()) {
+/* 174 */         if (((List<?>)this.maxHaoMap.get(chang +""+ q)).isEmpty()) {
 /* 175 */           qulist.remove(i);
 /*     */         } else {
 /* 177 */           isempty = false;
@@ -278,7 +281,7 @@
 /*     */       {
 /* 278 */         List<Integer> newHaos = new ArrayList<Integer>(haos);
 /* 279 */         List<Integer> newHaosOut = new ArrayList<Integer>(haosOut);
-/* 280 */         String key = String.valueOf(c + q);
+/* 280 */         String key = c+""+q ;
 /* 281 */         this.haoMap.put(key, newHaos);
 /* 282 */         this.maxHaoMap.put(key, newHaosOut);
 /*     */       }
