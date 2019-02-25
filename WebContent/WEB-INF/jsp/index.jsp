@@ -41,26 +41,29 @@
         <table style="width: 100%;text-align: center;" align="center">
             <tr>
                 <td align="center">
-                    <a class="btn btn-warning" style="width: 125px;background-color: #FF6600;font-weight: bold;color: black;" href="/game/setting"  >赛事设置</a>
+                    <a class="btn btn-warning" style="width: 120px;background-color: #FF6600;font-weight: bold;color: black;" href="/game/setting"  >赛事设置</a>
                 </td>
                 <td align="center">
-                    <a class="btn btn-warning" style="width: 125px;background-color: #FF6600;font-weight: bold;color: black;" href="/person/setting" >报名检入</a>
+                    <a class="btn btn-warning" style="width: 120px;background-color: #FF6600;font-weight: bold;color: black;" href="/person/setting" >报名检入</a>
                 </td>
                 <td align="center">
-                    <button class="btn btn-warning" style="width: 125px;background-color: #FF6600;font-weight: bold;color: black;"  data-toggle="modal" data-target="#myModa3"  onclick="">罚&nbsp;&nbsp;&nbsp;分</button>
+                    <a class="btn btn-warning" style="width: 120px;background-color: #FF6600;font-weight: bold;color: black;" href="/grade/shoudongchouqian" >手动抽签</a>
                 </td>
                 <td align="center">
-                    <button class="btn btn-warning" style="width: 125px;background-color: #FF6600;font-weight: bold;color: black;"  data-toggle="modal" data-target="#myModal"  onclick="">制表打印</button>
+                    <button class="btn btn-warning" style="width: 120px;background-color: #FF6600;font-weight: bold;color: black;"  data-toggle="modal" data-target="#myModa3"  onclick="">罚&nbsp;&nbsp;&nbsp;分</button>
+                </td>
+                <td align="center">
+                    <button class="btn btn-warning" style="width: 120px;background-color: #FF6600;font-weight: bold;color: black;"  data-toggle="modal" data-target="#myModal"  onclick="">制表打印</button>
                 </td>
 				<td align="center">
-                    <button class="btn btn-warning" style="width: 125px;background-color: #FF6600;font-weight: bold;color: black;"  data-toggle="modal" data-target="#myModal4"  onclick="">成绩评审</button>
+                    <button class="btn btn-warning" style="width: 120px;background-color: #FF6600;font-weight: bold;color: black;"  data-toggle="modal" data-target="#myModal4"  onclick="">成绩评审</button>
                 </td>
 
                 <td align="center">
-                    <button class="btn btn-warning" style="width: 125px;background-color: #FF6600;font-weight: bold;color: black;"  data-toggle="modal" data-target="#myModal2"  onclick="">成绩打印</button>
+                    <button class="btn btn-warning" style="width: 120px;background-color: #FF6600;font-weight: bold;color: black;"  data-toggle="modal" data-target="#myModal2"  onclick="">成绩打印</button>
                 </td>
                 <td align="center">
-                    <a class="btn btn-warning" style="width: 125px;background-color: #FF6600;font-weight: bold;color: black;" href="/person/lucky/${game.id}" target="_blank">幸运抽奖</a>
+                    <a class="btn btn-warning" style="width: 120px;background-color: #FF6600;font-weight: bold;color: black;" href="/person/lucky/${game.id}" target="_blank">幸运抽奖</a>
                 </td>
             </tr>
         </table>
