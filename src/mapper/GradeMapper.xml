@@ -15,6 +15,17 @@
     <result column="ranking" property="ranking" jdbcType="DOUBLE" />
     <result column="sorts" property="sorts" jdbcType="DOUBLE" />
   </resultMap>
+  
+  <resultMap id="ChouQianMap" type="com.elangzhi.fish.model.ChouQian" >
+    <id column="id" property="personId" jdbcType="BIGINT" />
+    <result column="name" property="personName" jdbcType="VARCHAR"/>
+    <result column="number" property="personNumber" jdbcType="VARCHAR"/>
+    <result column="game_id" property="gameId" jdbcType="BIGINT" />
+    <result column="chang" property="chang" jdbcType="INTEGER" />
+    <result column="qu" property="qu" jdbcType="INTEGER" />
+    <result column="room" property="room" jdbcType="INTEGER" />
+  </resultMap>
+  
   <sql id="Base_Column_List" >
     id, person_id, game_id, `time`, chang, qu,room, `number`, weight, grade, ranking
   </sql>
@@ -191,7 +202,15 @@
     and b.number = #{number,jdbcType=INTEGER}
     order by a.`qu` asc ,a.room asc,a.number desc,a.weight desc
   </select>
-  
+  <select id="findItem" resultMap="BaseResultMap">
+      select a.*,b.`name` personName,b.number personNumber
+    from grade a
+    left join person b on a.person_id = b.id
+    where 
+    a.game_id = #{gameId,jdbcType=BIGINT}
+    and a.person_id= #{personId,jdbcType=INTEGER}
+    and a.chang = #{chang,jdbcType=INTEGER}
+  </select>
     
   <select id="CheckInfo" resultType="com.elangzhi.fish.model.Grade">
                 
@@ -401,6 +420,22 @@
 		<if test="gameId != null" >
             and game_id = #{gameId,jdbcType=BIGINT}
         </if>
+  	</select>
+  	
+  	<select id="chouQianList" resultMap="ChouQianMap">
+  	    SELECT
+			p.id,
+			p.`name`,
+			p.number,
+			#{chang} as chang,
+			g.qu,
+			g.room
+		FROM
+			person p
+		LEFT JOIN grade g ON p.id = g.person_id
+		AND g.chang = #{chang,jdbcType=INTEGER}
+		WHERE
+			p.game_id = #{gameId,jdbcType=BIGINT}
   	</select>
 
 </mapper>

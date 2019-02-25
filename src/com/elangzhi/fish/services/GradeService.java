@@ -1,5 +1,6 @@
 package com.elangzhi.fish.services;
 
+import com.elangzhi.fish.model.ChouQian;
 import com.elangzhi.fish.model.Grade;
 import java.util.List;
 
@@ -33,6 +34,10 @@ public abstract interface GradeService
   public abstract List<Grade> zongfenShow(Long paramLong);
   
   public abstract int getMaxGradeByGame(Long paramLong);
+
+  public abstract List<ChouQian> chouQianList(Long gameid, int chang);
+
+public abstract void updateOrInsertGrade(Grade g);	
 }
 
 

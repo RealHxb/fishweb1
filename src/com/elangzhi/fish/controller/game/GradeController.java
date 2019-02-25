@@ -4,8 +4,10 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 /*     */ 
 /*     */ import com.elangzhi.fish.controller.json.Tip;
+import com.elangzhi.fish.model.ChouQian;
 /*     */ import com.elangzhi.fish.model.Game;
 /*     */ import com.elangzhi.fish.model.Grade;
+import com.elangzhi.fish.model.Person;
 /*     */ import com.elangzhi.fish.services.GameService;
 /*     */ import com.elangzhi.fish.services.GradeService;
 /*     */ import com.elangzhi.fish.services.PersonService;
@@ -34,6 +36,40 @@ import org.springframework.web.bind.annotation.RequestMethod;
 /*     */ public class GradeController
 /*     */ {
 /*  35 */   static Logger logger = Logger.getLogger(GameController.class.getName());
+
+			@RequestMapping({"/shoudongchouqian"})
+/*  45 */   public ModelAndView shoudongchouqian(ModelMap model) { 
+			  Game game = this.gameService.findNew();
+/*  46 */     model.put("game", game);
+/*  51 */     return new ModelAndView("grade/shoudongchouqian", model);
+/*     */   }
+			@RequestMapping({"/chouqianList"})
+			@ResponseBody
+			public Tip chouqianList(@RequestParam(value="chang", required=true) int chang) {
+				Game game = this.gameService.findNew();
+				List<ChouQian> roomList = this.gradeService.chouQianList(game.getId(), chang);
+				Tip tip = new Tip();
+				tip.setData(roomList);
+				return tip;
+			}
+			@RequestMapping({"/savechouqian"})
+			@ResponseBody
+			public Tip saveChouqian(ChouQian cq) {
+				Game game = this.gameService.findNew();
+				Grade g = new Grade();
+				try {
+					g.setGameId(game.getId());
+					g.setPersonId(cq.getPersonId());
+					g.setChang(cq.getChang());
+					g.setQu(cq.getQu());
+					g.setRoom(cq.getRoom());
+					gradeService.updateOrInsertGrade(g);
+					return new Tip();
+				} catch (Exception e) {
+					  e.printStackTrace();
+					return new Tip(Integer.valueOf(1));
+				}
+			}
 /*     */   
 /*     */   @RequestMapping({"/jifen/{gameId}"})
 /*     */   @ResponseBody

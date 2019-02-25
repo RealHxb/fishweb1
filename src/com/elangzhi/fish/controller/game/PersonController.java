@@ -171,11 +171,11 @@
 /*     */     
 /* 168 */     int random = getRandom(Integer.valueOf(qulist.size()));
 /* 169 */     int thequ = Integer.parseInt((String)qulist.get(random));
-/* 170 */     if (((List<?>)this.maxHaoMap.get(chang +""+ thequ)).isEmpty()) {
+/* 170 */     if ((this.maxHaoMap.get(chang +""+ thequ)).isEmpty()) {
 /* 171 */       qulist.remove(random);
 /* 172 */       for (int i = 0; i < qulist.size(); i++) {
 /* 173 */         String q = (String)qulist.get(i);
-/* 174 */         if (((List<?>)this.maxHaoMap.get(chang +""+ q)).isEmpty()) {
+/* 174 */         if ((this.maxHaoMap.get(chang +""+ q)).isEmpty()) {
 /* 175 */           qulist.remove(i);
 /*     */         } else {
 /* 177 */           isempty = false;

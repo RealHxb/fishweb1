@@ -2,6 +2,7 @@
 /*     */ 
 /*     */ import com.elangzhi.fish.dao.GameMapper;
 /*     */ import com.elangzhi.fish.dao.GradeMapper;
+import com.elangzhi.fish.model.ChouQian;
 /*     */ import com.elangzhi.fish.model.Game;
 /*     */ import com.elangzhi.fish.model.Grade;
 /*     */ import com.elangzhi.fish.services.GradeService;
@@ -380,4 +381,19 @@
 /*     */   {
 /* 390 */     return this.gradeMapper.getMaxGradeByGame(gameId);
 /*     */   }
-/*     */ }
+/*     */
+	public List<ChouQian> chouQianList(Long gameId, int chang) {
+		
+		return this.gradeMapper.chouQianList(gameId,chang);
+	}
+	public void updateOrInsertGrade(Grade g) {
+		Grade grade = this.gradeMapper.findItem(g);
+		if(null != grade) {
+			grade.setQu(g.getQu());
+			grade.setRoom(g.getRoom());
+			gradeMapper.updateByPrimaryKeySelective(grade);
+		}else {
+			save(g);
+		}
+	}
+}

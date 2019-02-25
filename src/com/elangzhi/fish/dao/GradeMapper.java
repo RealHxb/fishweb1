@@ -1,5 +1,6 @@
 package com.elangzhi.fish.dao;
 
+import com.elangzhi.fish.model.ChouQian;
 import com.elangzhi.fish.model.Grade;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
@@ -59,6 +60,11 @@ public abstract interface GradeMapper
   public abstract List<Grade> findGroupAllNumberGrade(@Param("personName") String paramString, @Param("gameId") Long paramLong, @Param("chang") Integer paramInteger1, @Param("qu") Integer paramInteger2);
   
   public abstract int getMaxGradeByGame(@Param("gameId") Long paramLong);
+
+  public abstract List<ChouQian> chouQianList(@Param("gameId")Long gameId,@Param("chang")int chang);
+
+public abstract Grade findItem(Grade g);
+
 }
 
 
