@@ -436,6 +436,8 @@
 		AND g.chang = #{chang,jdbcType=INTEGER}
 		WHERE
 			p.game_id = #{gameId,jdbcType=BIGINT}
+			and p.type='20'
+		order by p.number asc
   	</select>
 
 </mapper>
